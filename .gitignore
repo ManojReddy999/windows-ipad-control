@@ -1,0 +1,13 @@
+# Build output
+bin/
+obj/
+*.user
+
+# Runtime files
+config.json
+*.log
+debug_touchpad
+
+# OS
+Thumbs.db
+.DS_Store
