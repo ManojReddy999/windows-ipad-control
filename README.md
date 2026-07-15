@@ -100,6 +100,11 @@ The app lives in the system tray. A `config.json` is created next to the exe on 
 - **No finger-following gesture animations.** iPadOS reserves the interactive, animated multi-finger gestures for genuine Apple trackpads (Magic Keyboard / Magic Trackpad) — it's gated by device identity, which a pure-software BLE peripheral can't present (Windows also blocks publishing the Device Information Service needed to spoof it). The gestures here trigger the same iPad actions, but fire on release instead of animating under your fingers.
 - Windows 11 only (relies on the current WinRT BLE peripheral APIs and the lifted HID-service restriction).
 
+## Coming up next
+
+- **Clipboard sync** — copy on one device, paste on the other
+- **Seamless file transfer** — move files between the laptop and iPad without cables or cloud round-trips
+
 ## License
 
 MIT
