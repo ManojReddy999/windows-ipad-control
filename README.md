@@ -1,6 +1,8 @@
 # windows-ipad-control
 
-Use your **Windows laptop's keyboard, trackpad, and gestures to control your iPad** — Universal-Control style — with **no extra hardware, no phone, and no driver changes.** Your laptop presents itself directly to the iPad as a Bluetooth Low Energy keyboard + mouse.
+A **free, open-source** way to use your **Windows laptop's keyboard, trackpad, and gestures to control your iPad** — Universal-Control style — with **no extra hardware, no phone, and no driver changes.** Your laptop presents itself directly to the iPad as a Bluetooth Low Energy keyboard + mouse.
+
+Apple's Universal Control does this natively but is Mac-only; a couple of commercial apps do it on Windows for a fee. This is an open take on the same idea — including trackpad gesture forwarding — that you can read, build, and modify yourself.
 
 Push your mouse into the right edge of the laptop screen and it crosses onto the iPad. Sweep off the iPad's left edge to come back. Three-finger swipes drive Home, the App Switcher, and app switching.
 
@@ -10,7 +12,18 @@ Laptop  ──────── Bluetooth LE (HID) ────────► 
  forwards as HID reports)                   keyboard + mouse)
 ```
 
-## Why this works (and why it's unusual)
+## How it compares
+
+| Approach | Feel | Notes |
+|---|---|---|
+| Apple Universal Control | Native glide-over | Mac ↔ iPad only |
+| Screen-mirroring tools (AirDroid Cast, Splashtop, TeamViewer) | Control a mirror of the iPad on your PC | The iPad screen is shown on the laptop; different from controlling the iPad in place |
+| Commercial "software KVM" apps | Native glide-over | Paid, closed-source |
+| **This project** | Native glide-over | Free, open-source, Windows; adds 3-finger trackpad gestures + edge-crossing |
+
+## Why this works technically
+
+For years the Windows Bluetooth stack blocked apps from advertising the HID service (UUID `0x1812`), so a PC couldn't pretend to be a Bluetooth keyboard/mouse — the standard workaround was to route through a phone or a dedicated dongle. That restriction has since been **lifted**: on current Windows 11 builds, `GattServiceProvider.CreateAsync(0x1812)` succeeds. This project uses that to make the laptop a **BLE HID peripheral in pure software**, using the normal Windows Bluetooth stack — so Windows Bluetooth keeps working for everything else at the same time.
 
 For years the Windows Bluetooth stack blocked apps from advertising the HID service (UUID `0x1812`), so a PC couldn't pretend to be a Bluetooth keyboard/mouse — the standard workaround was to route through a phone or a dedicated dongle. That restriction has since been **lifted**: on current Windows 11 builds, `GattServiceProvider.CreateAsync(0x1812)` succeeds. This project uses that to make the laptop a **BLE HID peripheral in pure software**, using the normal Windows Bluetooth stack — so Windows Bluetooth keeps working for everything else at the same time.
 
